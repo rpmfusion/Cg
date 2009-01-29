@@ -1,6 +1,6 @@
-%define maj_version 2.0
-%define min_version 0015
-%define date May2008
+%define maj_version 2.1
+%define min_version 0016
+%define date November2008
 
 # No debuginfo
 %define debug_package %{nil}
@@ -14,7 +14,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2
+Release: 1
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -98,7 +98,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc usr/local/Cg/docs/Cg_Redist_License.pdf
 %ghost %{_bindir}/cgc
 %attr(755,root,root) %{_bindir}/cgc-%{_lib}
 %{_includedir}/Cg/
@@ -113,8 +112,8 @@ fi
 
 
 %changelog
-* Mon Aug 04 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 2.0.0015-2
-- rebuild
+* Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0016-1
+- Update to 2.1.0016 (November2008)
 
 * Sun May 18 2008 kwizart < kwizart at gmail.com > - 2.0.0015-1
 - Update to 2.0.0015 (May2008)
