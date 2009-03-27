@@ -116,7 +116,7 @@ fi
 
 
 %changelog
-* Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0017-1
+* Fri Mar 27 2009 kwizart < kwizart at gmail.com > - 2.1.0017-1
 - Update to 2.1.0017 (February2009)
 - Re-introduce disttag
 - Disable strip
