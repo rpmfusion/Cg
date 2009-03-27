@@ -1,9 +1,11 @@
 %define maj_version 2.1
-%define min_version 0016
-%define date November2008
+%define min_version 0017
+%define date February2009
 
 # No debuginfo
 %define debug_package %{nil}
+# Disable strip
+%define __strip /bin/true
 
 %ifarch x86_64
 %define priority 10
@@ -14,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 1
+Release: 1%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -34,6 +36,8 @@ libraries for use with both leading graphics APIs, runtime libraries for
 CgFX, example applications, and extensive documentation. Supporting over
 20 different OpenGL and DirectX profile targets, Cg will allow you to
 incorporate stunning interactive effects into your 3D applications.
+
+This is the %{date} release
 
 %package docs
 Summary: NVIDIA Cg Toolkit documentation
@@ -112,6 +116,11 @@ fi
 
 
 %changelog
+* Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0017-1
+- Update to 2.1.0017 (February2009)
+- Re-introduce disttag
+- Disable strip
+
 * Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0016-1
 - Update to 2.1.0016 (November2008)
 
