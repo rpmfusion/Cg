@@ -22,7 +22,11 @@ Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86.tgz
 Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86_64.tgz
 License: Redistributable, no modification permitted
+%if 0%{?fedora} >= 11
+ExclusiveArch: i586 x86_64
+%else
 ExclusiveArch: i386 x86_64
+%endif
 Requires: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -55,18 +59,13 @@ Provides: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 This package contains Cg shared support library.
 
 %prep
-%ifarch i386
+%ifarch %{ix86}
 %setup -q -c %{name}-%{version}
 %endif
 %ifarch x86_64
 %setup -q -c %{name}-%{version} -D -T -a 1
 %endif
 
-# Tweak to have debuginfo - part 2/2
-%if "%fedora" > "7"
-cp -p %{_prefix}/lib/rpm/find-debuginfo.sh .
-sed -i -e 's|strict=true|strict=false|' find-debuginfo.sh
-%endif
 
 %build
 # Nothing to build
@@ -120,6 +119,7 @@ fi
 - Update to 2.1.0017 (February2009)
 - Re-introduce disttag
 - Disable strip
+- Fix some conditionnals
 
 * Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0016-1
 - Update to 2.1.0016 (November2008)
