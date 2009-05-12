@@ -1,9 +1,11 @@
-%define maj_version 2.0
-%define min_version 0015
-%define date May2008
+%define maj_version 2.2
+%define min_version 0006
+%define date April2009
 
 # No debuginfo
 %define debug_package %{nil}
+# Disable strip
+%define __strip /bin/true
 
 %ifarch x86_64
 %define priority 10
@@ -14,15 +16,24 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2
+Release: 1%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
-Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86.tgz
-Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/%{version}/Cg-%{maj_version}_%{date}_x86_64.tgz
-License: Redistributable, no modification permitted
+Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
+Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86_64.tgz
+License: Redistributable, no modification permitted and MIT
+%if 0%{?fedora} >= 11
+ExclusiveArch: i586 x86_64
+%else
 ExclusiveArch: i386 x86_64
+%endif
 Requires: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRequires:  freeglut-devel
+BuildRequires:  glew-devel >= 1.5.1
+BuildRequires:  libXi-devel
+BuildRequires:  libXmu-devel
 
 Requires(post): /usr/sbin/alternatives
 Requires(preun): /usr/sbin/alternatives
@@ -34,6 +45,8 @@ libraries for use with both leading graphics APIs, runtime libraries for
 CgFX, example applications, and extensive documentation. Supporting over
 20 different OpenGL and DirectX profile targets, Cg will allow you to
 incorporate stunning interactive effects into your 3D applications.
+
+This is the %{date} release
 
 %package docs
 Summary: NVIDIA Cg Toolkit documentation
@@ -51,22 +64,34 @@ Provides: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 This package contains Cg shared support library.
 
 %prep
-%ifarch i386
+%ifarch %{ix86}
 %setup -q -c %{name}-%{version}
 %endif
 %ifarch x86_64
 %setup -q -c %{name}-%{version} -D -T -a 1
 %endif
 
-# Tweak to have debuginfo - part 2/2
-%if "%fedora" > "7"
-cp -p %{_prefix}/lib/rpm/find-debuginfo.sh .
-sed -i -e 's|strict=true|strict=false|' find-debuginfo.sh
-%endif
+#Remove binary bundled tools
+rm usr/bin/{cginfo,cgfxcat}
+
 
 %build
 # Nothing to build
-echo "Nothing to build"
+echo "Nothing to build,... Well not exactly"
+
+for b in cgfxcat cginfo ; do
+    make -C usr/local/Cg/examples/Tools/${b} clean
+    sed -i -e 's/-DGLEW_STATIC//' usr/local/Cg/examples/Tools/${b}/Makefile
+    sed -i -e 's/-Wall/%{optflags}/' usr/local/Cg/examples/Tools/${b}/Makefile
+    make -C usr/local/Cg/examples/Tools/${b} \
+    GLEW=%{_prefix} \
+    CG_INC_PATH=%{_builddir}/%{buildsubdir}/usr/include \
+    CG_LIB_PATH=%{_builddir}/%{buildsubdir}/%{_libdir}
+    mv usr/local/Cg/examples/Tools/${b}/${b} usr/bin
+    strip usr/bin/${b}
+    make -C usr/local/Cg/examples/Tools/${b} clean
+done
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -80,6 +105,7 @@ mv $RPM_BUILD_ROOT%{_bindir}/cgc $RPM_BUILD_ROOT%{_bindir}/cgc-%{_lib}
 
 # Owernship of the alternative provides
 touch $RPM_BUILD_ROOT%{_bindir}/cgc
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -97,11 +123,15 @@ fi
 %postun -n libCg -p /sbin/ldconfig
 
 %files
-%defattr(644,root,root,755)
-%doc usr/local/Cg/docs/Cg_Redist_License.pdf
+%defattr(755,root,root,755)
 %ghost %{_bindir}/cgc
-%attr(755,root,root) %{_bindir}/cgc-%{_lib}
+%{_bindir}/cgc-%{_lib}
+%{_bindir}/cgfxcat
+%{_bindir}/cginfo
+%defattr(644,root,root,755)
 %{_includedir}/Cg/
+%dir %{_mandir}/manCgFX
+%dir %{_mandir}/manCg
 %{_mandir}/man*/*
 
 %files docs
@@ -109,12 +139,22 @@ fi
 %doc usr/local/Cg/docs usr/local/Cg/examples usr/local/Cg/include
 
 %files -n libCg
+%defattr(755,root,root,755)
 %{_libdir}/*.so
 
 
 %changelog
-* Mon Aug 04 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 2.0.0015-2
-- rebuild
+* Wed Apr 22 2009 kwizart < kwizart at gmail.com > - 2.2-1
+- Update to 2.2.0006 (April2009)
+
+* Fri Mar 27 2009 kwizart < kwizart at gmail.com > - 2.1.0017-1
+- Update to 2.1.0017 (February2009)
+- Re-introduce disttag
+- Disable strip
+- Fix some conditionnals
+
+* Fri Jan  9 2009 kwizart < kwizart at gmail.com > - 2.1.0016-1
+- Update to 2.1.0016 (November2008)
 
 * Sun May 18 2008 kwizart < kwizart at gmail.com > - 2.0.0015-1
 - Update to 2.0.0015 (May2008)
