@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -73,6 +73,11 @@ This package contains Cg shared support library.
 
 #Remove binary bundled tools
 rm usr/bin/{cginfo,cgfxcat}
+
+#Clean exemples.
+for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced} -type d); do
+  pushd ${d} ; make clean ; popd
+done
 
 
 %build
@@ -144,6 +149,9 @@ fi
 
 
 %changelog
+* Fri May 15 2009 kwizart < kwizart at gmail.com > - 2.2-2
+- Clean exemples.
+
 * Wed Apr 22 2009 kwizart < kwizart at gmail.com > - 2.2-1
 - Update to 2.2.0006 (April2009)
 
