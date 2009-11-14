@@ -1,6 +1,6 @@
 %define maj_version 2.2
-%define min_version 0006
-%define date April2009
+%define min_version 0008
+%define date October2009
 
 # No debuginfo
 %define debug_package %{nil}
@@ -16,13 +16,15 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2%{?dist}
+Release: 1%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
 Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86_64.tgz
 License: Redistributable, no modification permitted and MIT
-%if 0%{?fedora} >= 11
+%if 0%{?fedora} > 11 || 0%{?rhel} > 5
+ExclusiveArch: i686 x86_64
+%else 0%{?fedora} == 11
 ExclusiveArch: i586 x86_64
 %else
 ExclusiveArch: i386 x86_64
@@ -149,6 +151,9 @@ fi
 
 
 %changelog
+* Sat Nov 14 2009 Nicolas Chauvet <kwizart@fedoraproject.org> - 2.2-1
+- Update to 2.2.0008 (October2009)
+
 * Fri May 15 2009 kwizart < kwizart at gmail.com > - 2.2-2
 - Clean exemples.
 
