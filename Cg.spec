@@ -1,6 +1,6 @@
 %define maj_version 2.2
-%define min_version 0008
-%define date October2009
+%define min_version 0017
+%define date February2010
 
 # No debuginfo
 %define debug_package %{nil}
@@ -151,7 +151,10 @@ fi
 
 
 %changelog
-* Sat Nov 14 2009 Nicolas Chauvet <kwizart@fedoraproject.org> - 2.2-1
+* Sun Feb 28 2010 Nicolas Chauvet <kwizart@fedoraproject.org> - 2.2.0017-1
+- Update to 2.2.0017 (February2010)
+
+* Sat Nov 14 2009 Nicolas Chauvet <kwizart@fedoraproject.org> - 2.2.0008-1
 - Update to 2.2.0008 (October2009)
 
 * Fri May 15 2009 kwizart < kwizart at gmail.com > - 2.2-2
