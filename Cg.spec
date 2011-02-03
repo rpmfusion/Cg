@@ -1,6 +1,6 @@
 %define maj_version 3.0
-%define min_version 0007
-%define date July2010
+%define min_version 0015
+%define date November2010
 
 # No debuginfo
 %define debug_package %{nil}
@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2%{?dist}
+Release: 1%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -151,6 +151,9 @@ fi
 
 
 %changelog
+* Thu Feb 03 2011 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0015-1
+- Update to 3.0.0015 (November2010)
+
 * Mon Oct 11 2010 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0007-2
 - rebuilt for compiler bug
 
