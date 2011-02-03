@@ -1,6 +1,6 @@
-%define maj_version 2.2
-%define min_version 0017
-%define date February2010
+%define maj_version 3.0
+%define min_version 0015
+%define date November2010
 
 # No debuginfo
 %define debug_package %{nil}
@@ -143,7 +143,7 @@ fi
 
 %files docs
 %defattr(644,root,root,755)
-%doc usr/local/Cg/docs usr/local/Cg/examples usr/local/Cg/include
+%doc usr/local/Cg/docs usr/local/Cg/examples
 
 %files -n libCg
 %defattr(755,root,root,755)
@@ -151,6 +151,15 @@ fi
 
 
 %changelog
+* Thu Feb 03 2011 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0015-1
+- Update to 3.0.0015 (November2010)
+
+* Mon Oct 11 2010 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0007-2
+- rebuilt for compiler bug
+
+* Fri Sep 17 2010 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0007-1
+- Update to 3.0.007 (July2010)
+
 * Sun Feb 28 2010 Nicolas Chauvet <kwizart@fedoraproject.org> - 2.2.0017-1
 - Update to 2.2.0017 (February2010)
 
