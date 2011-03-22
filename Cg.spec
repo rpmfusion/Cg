@@ -77,11 +77,11 @@ This package contains Cg shared support library.
 rm usr/bin/{cginfo,cgfxcat}
 
 #Clean exemples.
-for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced,glew} -type d); do
+for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced} -type d); do
   pushd ${d} ; make clean ; popd
 done
 
-for d in $(find usr/local/Cg/examples/Tools/{cgfxcat,cginfo,trace} -type d); do
+for d in usr/local/Cg/examples/Tools/{cgfxcat,cginfo,trace} usr/local/Cg/examples/OpenGL/glew ; do
   pushd ${d} ; make clean ; popd
 done
 
