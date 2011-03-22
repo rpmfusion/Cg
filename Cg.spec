@@ -1,6 +1,6 @@
 %define maj_version 3.0
-%define min_version 0015
-%define date November2010
+%define min_version 0016
+%define date February2011
 
 # No debuginfo
 %define debug_package %{nil}
@@ -77,7 +77,11 @@ This package contains Cg shared support library.
 rm usr/bin/{cginfo,cgfxcat}
 
 #Clean exemples.
-for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced} -type d); do
+for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced,glew} -type d); do
+  pushd ${d} ; make clean ; popd
+done
+
+for d in $(find usr/local/Cg/examples/Tools/{cgfxcat,cginfo,trace} -type d); do
   pushd ${d} ; make clean ; popd
 done
 
@@ -151,6 +155,9 @@ fi
 
 
 %changelog
+* Tue Mar 22 2011 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-1
+- Update to 3.0.0016 (February2011)
+
 * Thu Feb 03 2011 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0015-1
 - Update to 3.0.0015 (November2010)
 
