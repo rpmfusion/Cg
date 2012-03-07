@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -155,6 +155,9 @@ fi
 
 
 %changelog
+* Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-3
+- Rebuilt for c++ ABI breakage
+
 * Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
