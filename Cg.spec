@@ -1,6 +1,6 @@
-%define maj_version 3.0
-%define min_version 0016
-%define date February2011
+%define maj_version 3.1
+%define min_version 0013
+%define date April2012
 
 # No debuginfo
 %define debug_package %{nil}
@@ -81,7 +81,7 @@ for d in $(find usr/local/Cg/examples/OpenGL/{basic,advanced} -type d); do
   pushd ${d} ; make clean ; popd
 done
 
-for d in usr/local/Cg/examples/Tools/{cgfxcat,cginfo,trace} usr/local/Cg/examples/OpenGL/glew ; do
+for d in usr/local/Cg/examples/Tools/{cgfxcat,cginfo} usr/local/Cg/examples/OpenGL/glew ; do
   pushd ${d} ; make clean ; popd
 done
 
@@ -110,7 +110,6 @@ mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir}}
 cp -pr usr/bin/* $RPM_BUILD_ROOT%{_bindir}/
 cp -pr usr/include/* $RPM_BUILD_ROOT%{_includedir}/
 cp -pr .%{_libdir}/* $RPM_BUILD_ROOT%{_libdir}/
-cp -pr usr/share/man/* $RPM_BUILD_ROOT%{_mandir}/
 
 mv $RPM_BUILD_ROOT%{_bindir}/cgc $RPM_BUILD_ROOT%{_bindir}/cgc-%{_lib}
 
@@ -141,9 +140,6 @@ fi
 %{_bindir}/cginfo
 %defattr(644,root,root,755)
 %{_includedir}/Cg/
-%dir %{_mandir}/manCgFX
-%dir %{_mandir}/manCg
-%{_mandir}/man*/*
 
 %files docs
 %defattr(644,root,root,755)
@@ -155,6 +151,15 @@ fi
 
 
 %changelog
+* Thu Jun 07 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.1.0013-1
+- Update to 3.1.0013 (April2012)
+
+* Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-3
+- Rebuilt for c++ ABI breakage
+
+* Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Tue Mar 22 2011 Nicolas Chauvet <kwizart@gmail.com> - 3.0.0016-1
 - Update to 3.0.0016 (February2011)
 
