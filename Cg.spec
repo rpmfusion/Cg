@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -85,6 +85,9 @@ for d in usr/local/Cg/examples/Tools/{cgfxcat,cginfo} usr/local/Cg/examples/Open
   pushd ${d} ; make clean ; popd
 done
 
+# Clean Trace
+make -C usr/local/Cg/examples/Trace clean
+
 
 %build
 # Nothing to build
@@ -151,6 +154,9 @@ fi
 
 
 %changelog
+* Wed Jun 13 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.1.0013-2
+- Clean the Trace directory - rfbz#1708#c3
+
 * Thu Jun 07 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.1.0013-1
 - Update to 3.1.0013 (April2012)
 
