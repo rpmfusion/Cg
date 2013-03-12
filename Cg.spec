@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -154,6 +154,9 @@ fi
 
 
 %changelog
+* Tue Mar 12 2013 Nicolas Chauvet <kwizart@gmail.com> - 3.1.0013-3
+- https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Wed Jun 13 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.1.0013-2
 - Clean the Trace directory - rfbz#1708#c3
 
