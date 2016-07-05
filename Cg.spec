@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -95,8 +95,8 @@ echo "Nothing to build,... Well not exactly"
 
 for b in cgfxcat cginfo ; do
     make -C usr/local/Cg/examples/Tools/${b} clean
-    sed -i -e 's/-DGLEW_STATIC//' usr/local/Cg/examples/Tools/${b}/Makefile
-    sed -i -e 's/-Wall/%{optflags}/' usr/local/Cg/examples/Tools/${b}/Makefile
+    sed -i -e 's@-DGLEW_STATIC@@' usr/local/Cg/examples/Tools/${b}/Makefile
+    sed -i -e 's@-Wall@$RPM_OPT_FLAGS@' usr/local/Cg/examples/Tools/${b}/Makefile
     make -C usr/local/Cg/examples/Tools/${b} \
     GLEW=%{_prefix} \
     CG_INC_PATH=%{_builddir}/%{buildsubdir}/usr/include \
@@ -154,6 +154,9 @@ fi
 
 
 %changelog
+* Tue Jul 05 2016 Julian Sikorski <belegdol@fedoraproject.org> - 3.1.0013-5
+- Fixed build failure caused by presence of forward slashes in $RPM_OPT_FLAGS
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 3.1.0013-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
