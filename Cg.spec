@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
@@ -154,6 +154,9 @@ fi
 
 
 %changelog
+* Sat Mar 25 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 3.1.0013-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Tue Jul 05 2016 Julian Sikorski <belegdol@fedoraproject.org> - 3.1.0013-5
 - Fixed build failure caused by presence of forward slashes in $RPM_OPT_FLAGS
 
