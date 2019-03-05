@@ -32,6 +32,7 @@ ExclusiveArch: i386 x86_64
 Requires: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  gcc
 BuildRequires:  freeglut-devel
 BuildRequires:  glew-devel >= 1.5.1
 BuildRequires:  libXi-devel
