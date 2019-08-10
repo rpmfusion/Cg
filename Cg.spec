@@ -18,19 +18,13 @@ Name: Cg
 Version: %{maj_version}.%{min_version}
 Release: 12%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
-Group: Development/Languages
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
 Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86_64.tgz
 License: Redistributable, no modification permitted and MIT
-%if 0%{?fedora} > 11 || 0%{?rhel} > 5
+
 ExclusiveArch: i686 x86_64
-%else 0%{?fedora} == 11
-ExclusiveArch: i586 x86_64
-%else
-ExclusiveArch: i386 x86_64
-%endif
+
 Requires: lib%{name}(%{_target_cpu}) = %{version}-%{release}
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gcc-c++
 BuildRequires:  freeglut-devel
@@ -53,14 +47,12 @@ This is the %{date} release
 
 %package docs
 Summary: NVIDIA Cg Toolkit documentation
-Group: Documentation
 
 %description docs
 NVIDIA Cg Toolkit documentation.
 
 %package -n lib%{name}
 Summary: NVIDIA Cg Toolkit shared support library
-Group: System Environment/Libraries
 Provides: lib%{name}(%{_target_cpu}) = %{version}-%{release}
 
 %description -n lib%{name}
@@ -109,7 +101,6 @@ done
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir}}
 cp -pr usr/bin/* $RPM_BUILD_ROOT%{_bindir}/
 cp -pr usr/include/* $RPM_BUILD_ROOT%{_includedir}/
@@ -120,9 +111,6 @@ mv $RPM_BUILD_ROOT%{_bindir}/cgc $RPM_BUILD_ROOT%{_bindir}/cgc-%{_lib}
 # Owernship of the alternative provides
 touch $RPM_BUILD_ROOT%{_bindir}/cgc
 
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 /usr/sbin/alternatives --install %{_bindir}/cgc cgc %{_bindir}/cgc-%{_lib} %{priority}  || :
@@ -137,20 +125,16 @@ fi
 %postun -n libCg -p /sbin/ldconfig
 
 %files
-%defattr(755,root,root,755)
 %ghost %{_bindir}/cgc
 %{_bindir}/cgc-%{_lib}
 %{_bindir}/cgfxcat
 %{_bindir}/cginfo
-%defattr(644,root,root,755)
 %{_includedir}/Cg/
 
 %files docs
-%defattr(644,root,root,755)
 %doc usr/local/Cg/docs usr/local/Cg/examples
 
 %files -n libCg
-%defattr(755,root,root,755)
 %{_libdir}/*.so
 
 
