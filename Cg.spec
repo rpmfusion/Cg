@@ -16,7 +16,7 @@
 Summary: NVIDIA Cg Toolkit
 Name: Cg
 Version: %{maj_version}.%{min_version}
-Release: 21%{?dist}
+Release: 22%{?dist}
 URL: http://developer.nvidia.com/object/cg_toolkit.html
 Source0: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86.tgz
 Source1: http://developer.download.nvidia.com/cg/Cg_%{maj_version}/Cg-%{maj_version}_%{date}_x86_64.tgz
@@ -139,6 +139,9 @@ fi
 
 
 %changelog
+* Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.1.0013-22
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
 * Fri Aug 02 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.1.0013-21
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
